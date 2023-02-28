@@ -15,8 +15,8 @@ resource "azurerm_subnet" "function_app" {
 
   name = format("snet-fa-%s-%s-%s", random_id.environment_id.hex, var.environment, each.value)
 
-  resource_group_name = azurerm_resource_group.rg[each.value].name
-  location            = azurerm_resource_group.rg[each.value].location
+  resource_group_name  = azurerm_resource_group.rg[each.value].name
+  virtual_network_name = azurerm_virtual_network.fa[each.value].name
 
   address_prefixes = ["10.0.1.0/24"]
 
