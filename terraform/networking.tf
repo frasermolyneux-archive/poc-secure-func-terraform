@@ -72,7 +72,7 @@ resource "azurerm_private_dns_zone" "file" {
 resource "azurerm_private_dns_zone_virtual_network_link" "azurewebsites" {
   for_each = toset(var.locations)
 
-  name                  = "azurewebsites"
+  name                  = format("link-azurewebsites-%s-%s-%s", random_id.environment_id.hex, var.environment, each.value)
   resource_group_name   = azurerm_resource_group.rg[var.primary_location].name
   private_dns_zone_name = azurerm_private_dns_zone.azurewebsites.name
   virtual_network_id    = azurerm_virtual_network.fa[each.value].id
@@ -81,7 +81,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "azurewebsites" {
 resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
   for_each = toset(var.locations)
 
-  name                  = "blob"
+  name                  = format("link-blob-%s-%s-%s", random_id.environment_id.hex, var.environment, each.value)
   resource_group_name   = azurerm_resource_group.rg[var.primary_location].name
   private_dns_zone_name = azurerm_private_dns_zone.blob.name
   virtual_network_id    = azurerm_virtual_network.fa[each.value].id
@@ -90,7 +90,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
 resource "azurerm_private_dns_zone_virtual_network_link" "table" {
   for_each = toset(var.locations)
 
-  name                  = "table"
+  name                  = format("link-table-%s-%s-%s", random_id.environment_id.hex, var.environment, each.value)
   resource_group_name   = azurerm_resource_group.rg[var.primary_location].name
   private_dns_zone_name = azurerm_private_dns_zone.table.name
   virtual_network_id    = azurerm_virtual_network.fa[each.value].id
@@ -99,7 +99,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "table" {
 resource "azurerm_private_dns_zone_virtual_network_link" "queue" {
   for_each = toset(var.locations)
 
-  name                  = "queue"
+  name                  = format("link-queue-%s-%s-%s", random_id.environment_id.hex, var.environment, each.value)
   resource_group_name   = azurerm_resource_group.rg[var.primary_location].name
   private_dns_zone_name = azurerm_private_dns_zone.queue.name
   virtual_network_id    = azurerm_virtual_network.fa[each.value].id
@@ -108,7 +108,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "queue" {
 resource "azurerm_private_dns_zone_virtual_network_link" "file" {
   for_each = toset(var.locations)
 
-  name                  = "file"
+  name                  = format("link-file-%s-%s-%s", random_id.environment_id.hex, var.environment, each.value)
   resource_group_name   = azurerm_resource_group.rg[var.primary_location].name
   private_dns_zone_name = azurerm_private_dns_zone.file.name
   virtual_network_id    = azurerm_virtual_network.fa[each.value].id
