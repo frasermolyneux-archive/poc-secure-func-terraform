@@ -154,10 +154,10 @@ resource "azurerm_linux_function_app" "fa" {
 
   // For the first time run scenario, we need to ensure that the private endpoints are created before the function app
   depends_on = [
-    azurerm_private_endpoint.sa_blob_pe[each.value],
-    azurerm_private_endpoint.sa_table_pe[each.value],
-    azurerm_private_endpoint.sa_queue_pe[each.value],
-    azurerm_private_endpoint.sa_file_pe[each.value]
+    azurerm_private_endpoint.sa_blob_pe,
+    azurerm_private_endpoint.sa_table_pe,
+    azurerm_private_endpoint.sa_queue_pe,
+    azurerm_private_endpoint.sa_file_pe
   ]
 }
 
